@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { HeaderProps } from '../../types/headerProps';
 import Cart from '../../assets/images/Vector.png';
 import { Body } from "./styles";
-import CartModal from './CartModal';
+import CartModal from '../CartModal';
 
 export const Header: React.FC<HeaderProps> = ({ cartItems }) => {
   const [showCartModal, setShowCartModal] = useState(false);

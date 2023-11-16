@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors, fonts } from '../../../styles/themes';
+import { colors, fonts } from '../../styles/themes';
 
 export const ModalContainer = styled.div`
   position: fixed;
@@ -11,6 +11,10 @@ export const ModalContainer = styled.div`
   transition: width 0.3s, opacity 0.3s;
   overflow-y: auto; 
   z-index: 1000; 
+
+  @media only screen and (min-width: 320px) and (max-width: 480px) {
+    width: 85%;
+  }
 `;
 
 export const ModalContent = styled.div`
@@ -25,7 +29,6 @@ export const ModalContent = styled.div`
     justify-content: center;
     list-style: none;
   }
-
 
   .total {
     display: flex;
@@ -84,6 +87,13 @@ export const Div = styled.div`
     margin: 0;
   }
 
+
+  @media only screen and (min-width: 320px) and (max-width: 480px) {
+
+    h2 {
+      width: 60%;
+    }
+  }
 `;
 
 
@@ -101,6 +111,13 @@ export const CloseButton = styled.div`
     &:hover {
       background-color: #a9a9a9;
       transition: 0.3s;
+    }
+  }
+
+  @media only screen and (min-width: 320px) and (max-width: 480px) {
+
+    button {
+      color: ${colors.primary};
     }
   }
 `;
@@ -133,7 +150,7 @@ export const ProductInfo = styled.div`
       margin: 0;
     }
 
-    p {
+    .price {
       font-size: 0.875rem;
       font-weight: 700;
       line-height: 1.063rem;
@@ -159,6 +176,53 @@ export const ProductInfo = styled.div`
       transition: 0.3s;
     }
   }
+
+
+  @media only screen and (min-width: 320px) and (max-width: 480px) {
+    justify-content: center;
+    width: 80%;
+    height: auto;
+
+    img {
+      width: 120px;
+      height: 120px;
+      margin-right: 0;
+      margin: 8% 0;
+    }
+
+    div {
+
+      h1 {
+        text-align: center;
+        font-size: 1rem;
+        line-height: 1.188rem;
+        width: 100vw;
+        margin-bottom: 2%;
+      }
+
+      .price {
+        background-color: ${colors.price};
+        color: ${colors.secondary};
+        border-radius: 5px;
+        font-size: ${fonts.md};
+        line-height: ${fonts.md};
+        margin-left: 65%;
+        margin-top: -53%;
+        width: 85px;
+        padding: 10px 0;
+      }
+    }
+
+    .remove {
+      position: absolute; 
+      top: 10px; 
+      right: 30px; 
+      font-size: 2.625rem;
+      background-color: ${colors.secondary};
+      color: #000000;
+    }
+  }
+
 `;
 
 export const DivFlex = styled.div`
@@ -166,6 +230,13 @@ export const DivFlex = styled.div`
   flex-direction: row;
   align-items: center;
   margin-left: 3%;
+
+
+  @media only screen and (min-width: 320px) and (max-width: 480px) {
+    flex-direction: column;
+    margin-bottom: 3%;
+  }
+
 `;
 
 export const QuantityControls = styled.div`
@@ -178,6 +249,7 @@ export const QuantityControls = styled.div`
     margin: 0;
     margin-top: -5px;
     margin-bottom: 5px;
+    margin-left: 0;
   }
 
   .quantity {
@@ -207,6 +279,21 @@ export const QuantityControls = styled.div`
       border-right: 1px solid ${colors.border};
       padding: 0 10px;
       margin: 0 2px;
+    }
+  }
+
+
+  @media only screen and (min-width: 320px) and (max-width: 480px) {
+    margin-right: 35%;
+    margin-top: 2%;
+    
+    p {
+      display: none;
+    }
+
+    .quantity {
+      padding: 6px 0;
+      border-radius: 5px;
     }
   }
 

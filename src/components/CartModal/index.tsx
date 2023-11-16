@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { CartModalProps } from '../../../types/cartModalProps';
+import { CartModalProps } from '../../types/cartModalProps';
 import {
   ModalContainer,
   ModalContent,
@@ -77,10 +77,12 @@ const CartModal: React.FC<CartModalProps> = ({ cartItems, onClose }) => {
                 <div>
                   <button className="remove" title='Remover do carrinho' onClick={() => removeProduct(item.id)}>X</button>
                 </div>
+                
                 <DivFlex>
                   <div>
                     <img src={item.photo} alt={item.name} />
                   </div>
+                  
                   <div>
                     <h1>{item.name}</h1>
                   </div>
@@ -96,7 +98,7 @@ const CartModal: React.FC<CartModalProps> = ({ cartItems, onClose }) => {
                   </QuantityControls>
 
                   <div>
-                    <p>R${Math.floor(item.quantity * item.price).toLocaleString('pt-BR')}</p>
+                    <p className='price'>R${Math.floor(item.quantity * item.price).toLocaleString('pt-BR')}</p>
                   </div>
                 </DivFlex>
               </ProductInfo>

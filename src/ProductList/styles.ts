@@ -28,6 +28,30 @@ export const Ul = styled.ul`
       border: 1px solid #ddd;
       border-radius: 8px 8px 0 0;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+      &.loading {
+        position: relative;
+
+        .shimmer {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: linear-gradient(to right, transparent 0%, #f0f0f0 50%, transparent 100%);
+          animation: shimmer 1.5s infinite linear;
+          content: '';
+        }
+      }
+    }
+
+    @keyframes shimmer {
+      0% {
+        background-position: -100% 0;
+      }
+      100% {
+        background-position: 100% 0;
+      }
     }
 
     .image-container {
@@ -95,6 +119,24 @@ export const Ul = styled.ul`
 
     button:hover {
       background-color: #2980b9;
+    }
+  }
+
+
+  @media only screen and (min-width: 320px) and (max-width: 480px) {
+
+    li {
+      width: calc(100% - 20px);
+      margin: 2% 0;
+
+      .product-card {
+        width: 250px;
+        height: 213px;
+      }
+
+      button {
+        width: 282px;
+      }
     }
   }
 `;

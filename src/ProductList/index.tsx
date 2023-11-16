@@ -4,15 +4,15 @@ import { Product } from '../types/product';
 import { Header } from '../components/Header';
 import ShoppingBag from '../../src/assets/images/shopping-bag.png';
 import { Ul, P } from './styles';
-import CartModal from '../components/Header/CartModal';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Skeleton from 'react-loading-skeleton';
 import { Footer } from '../components/Footer';
 
 const ProductList: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
-  const [cartItems, setCartItems] = useState<Product[]>([]); 
-  const [showCartModal, setShowCartModal] = useState(false);
+  const [cartItems, setCartItems] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -33,6 +33,8 @@ const ProductList: React.FC = () => {
         }
       } catch (error) {
         console.error('Erro ao buscar produtos:', error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -41,11 +43,10 @@ const ProductList: React.FC = () => {
 
   const addToCart = (product: Product) => {
     setCartItems((prevItems) => [...prevItems, product]);
-    setShowCartModal(true);
-    
+
     toast.success(`${product.name} adicionado ao carrinho!`, {
       position: 'top-right',
-      autoClose: 3000, 
+      autoClose: 3000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -54,46 +55,65 @@ const ProductList: React.FC = () => {
     });
   };
 
-  const isProductInCart = (productId: number) => cartItems.some(item => item.id === productId);
+  const isProductInCart = (productId: number) =>
+    cartItems.some((item) => item.id === productId);
 
   return (
     <div>
       <Header cartItems={cartItems} />
       <Ul>
-        {products.map((product) => (
-          <li key={product.id}>
-            <div className="product-card">
-              <div className="image-container">
-                <img src={product.photo} alt={product.name} />
+        {loading ? (
+          Array.from({ length: 8 }).map((_, index) => (
+            <li key={index}>
+              <div className="product-card">
+                <Skeleton height={200} width={200} />
+                <div className="info-container">
+                  <div className="info-container_1">
+                    <Skeleton height={20} width={150} />
+                    <Skeleton height={15} width={80} />
+                  </div>
+                  <Skeleton count={3} height={15} width={200} />
+                </div>
               </div>
-
-              <div className="info-container">
-                <div className="info-container_1">
-                  <h1>{product.name}</h1>
-                  <p>R${Math.floor(product.price)}</p>
+              <div>
+                <button disabled>
+                  <img src={ShoppingBag} alt="Shopping Bag" />
+                  Carregando...
+                </button>
+              </div>
+            </li>
+          ))
+        ) : (
+          products.map((product) => (
+            <li key={product.id}>
+              <div className="product-card">
+                <div className="image-container">
+                  <img src={product.photo} alt={product.name} />
                 </div>
 
-                <P>Redesigned from scratch and completely revised</P>
-              </div>
-            </div>
+                <div className="info-container">
+                  <div className="info-container_1">
+                    <h1>{product.name}</h1>
+                    <p>R${Math.floor(product.price)}</p>
+                  </div>
 
-            <div>
-              <button
-                onClick={() => addToCart(product)}
-                disabled={isProductInCart(product.id)}
-              >
-                <img src={ShoppingBag} alt="Shopping Bag" />
-                Comprar
-              </button>
-            </div>
-          </li>
-        ))}
+                  <P>Redesigned from scratch and completely revised</P>
+                </div>
+              </div>
+
+              <div>
+                <button onClick={() => addToCart(product)} disabled={isProductInCart(product.id)}>
+                  <img src={ShoppingBag} alt="Shopping Bag" />
+                  Comprar
+                </button>
+              </div>
+            </li>
+          ))
+        )}
       </Ul>
 
       <ToastContainer />
 
-      {showCartModal && <CartModal cartItems={cartItems} onClose={() => setShowCartModal(false)} />}
-      
       <Footer />
     </div>
   );

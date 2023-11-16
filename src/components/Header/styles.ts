@@ -50,4 +50,23 @@ export const Body = styled.div`
         }
     }
 
+
+    @media only screen and (min-width: 320px) and (max-width: 480px) {
+        padding: 5px 0;
+
+        .cart {
+            margin-left: 23%;
+
+            button {
+                width: 70px;
+                height: 35px;
+                border-radius: 10px;
+            }
+
+            span {
+                margin-left: 5%;
+            }
+        }
+    }
+
 `
