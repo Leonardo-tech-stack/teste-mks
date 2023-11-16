@@ -40,6 +40,7 @@ export const Body = styled.div`
             height: 40px;
             border: none;
             border-radius: 5px;
+            cursor: pointer;
         }
 
         span {
